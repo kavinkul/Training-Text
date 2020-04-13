@@ -39,12 +39,7 @@ public class FlavorTextObject {
 
         isMonday = checkMonday(this.year, this.month, this.day);
 
-        for (int i = 0; i < validLetters.Length; i++) {
-            if (this.moduleName.First() == validLetters[i]) {
-                startsDP = true;
-                break;
-            }
-        }
+        startsDP = checkStartsDP(this.moduleName);
     }
 
 
@@ -80,6 +75,20 @@ public class FlavorTextObject {
         return startsDP;
     }
 
+
+    // Determines if the module name starts with D-p
+    public bool checkStartsDP(string txt) {
+        // Removes the word "needy"
+        if (txt.Length > 6 && txt.Substring(0, 6) == "Needy ")
+            txt = txt.Substring(6, txt.Length - 6);
+
+        for (int i = 0; i < validLetters.Length; i++) {
+            if (txt.First() == validLetters[i])
+                return true;
+        }
+
+        return false;
+    }
 
     // Determines if the module was released on a Monday
     public bool checkMonday(int y, int m, int d) {
