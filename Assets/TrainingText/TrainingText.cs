@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using KModkit;
 
 public class TrainingText : MonoBehaviour {
@@ -13,7 +14,7 @@ public class TrainingText : MonoBehaviour {
     public KMSelectable SubmitButton;
     public KMSelectable[] TimeButtons;
     
-    public TextMesh FlavorText;
+    public Text FlavorText;
     public TextMesh ClockText;
     public TextMesh AnswerText;
 
