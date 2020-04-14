@@ -86,7 +86,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Cruel Boolean Maze", 2019, 11, 11, "Boolean Maze but it has extra logic in it."));
         flavorTexts.add(new FlavorTextObject("Boolean Venn Diagram", 2017, 6, 22, "Boolean operations and Venn diagrams.What could possibly go wrong?"));
         flavorTexts.add(new FlavorTextObject("Boolean Wires", 2019, 8, 3, "Self-repairing wires? That's some interesting tech."));
-        flavorTexts.add(new FlavorTextObject("Boot Too Big", 2017, 7, 19, "Hope you remember every module's name and how to pronunciate them."));
+        flavorTexts.add(new FlavorTextObject("Boot Too Big", 2017, 7, 19, "Hope you remember every module's name and how to pronounce them."));
         flavorTexts.add(new FlavorTextObject("Bordered Keys", 2019, 6, 17, "Meanwhile, these have borders?"));
         flavorTexts.add(new FlavorTextObject("Boxing", 2020, 1, 21, "*Reads the list with the names*\nOh, I get it."));
         flavorTexts.add(new FlavorTextObject("Braille", 2017, 10, 31, "Oh, so that's the name of this alphabet. Good to know."));
@@ -197,7 +197,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Encryption Bingo", 2019, 10, 11, "*Vegeta's Bingo Dance intensifies*"));
         flavorTexts.add(new FlavorTextObject("English Test", 2016, 11, 6, "This is going to be a piece of cake, and if it isn't going to, well, blame yourself."));
         flavorTexts.add(new FlavorTextObject("Equations", 2018, 7, 10, "On the bright side, these are just first grade equations."));
-        flavorTexts.add(new FlavorTextObject("Equations X", 2019, 4, 13, "*sees integrals and derivates*\n\"Well, it has been an honor knowing you all.\""));
+        flavorTexts.add(new FlavorTextObject("Equations X", 2019, 4, 13, "*sees integrals and derivatives*\n\"Well, it has been an honor knowing you all.\""));
         flavorTexts.add(new FlavorTextObject("Error Codes", 2018, 3, 10, "Bad driver update? On a bomb?"));
         flavorTexts.add(new FlavorTextObject("Etterna", 2020, 3, 23, "I hope your fingers are ready."));
         flavorTexts.add(new FlavorTextObject("European Travel", 2018, 3, 10, "It's time for some vacation. But the tickets are stuck in the bomb..."));
@@ -263,7 +263,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Guess Who?", 2020, 2, 15, "There is a trick to cut the possibilities in half in the original game, but here it isn't quite possible..."));
         flavorTexts.add(new FlavorTextObject("Guitar Chords", 2018, 6, 13, "We had a piano. Now we have a guitar. What's next, a drum set? Or a trumpet?"));
         flavorTexts.add(new FlavorTextObject("The Hangover", 2018, 12, 26, "Also known as \"Discovered bad decisions taken while drunk\"."));
-        flavorTexts.add(new FlavorTextObject("Harmony Sequence", 2019, 1, 22, "We walk in harmory, my student."));
+        flavorTexts.add(new FlavorTextObject("Harmony Sequence", 2019, 1, 22, "We walk in harmony, my student."));
         flavorTexts.add(new FlavorTextObject("Heraldry", 2019, 10, 2, "Uh, so is this how they made all those crests."));
         flavorTexts.add(new FlavorTextObject("Hereditary Base Notation", 2019, 12, 22, "Gotta love all these bases. And no, those aren't belong to us."));
         flavorTexts.add(new FlavorTextObject("The Hexabutton", 2019, 2, 5, "It's a button. It has 6 sides instead of none or 4. Why do I have a bad feeling about this?"));
@@ -369,7 +369,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Module Listening", 2019, 9, 20, "Basically the \"Listening\" module. On steroids. And with sounds coming from other modules."));
         flavorTexts.add(new FlavorTextObject("Module Maze", 2019, 2, 9, "Tip: know the modules, know the icons."));
         flavorTexts.add(new FlavorTextObject("Module Movements", 2019, 7, 28, "In other words: DOOOOODGE!"));
-        flavorTexts.add(new FlavorTextObject("Modules Against Humanity", 2016, 12, 24, "Well, the title is self explanitory."));
+        flavorTexts.add(new FlavorTextObject("Modules Against Humanity", 2016, 12, 24, "Well, the title is self explanatory."));
         flavorTexts.add(new FlavorTextObject("Modulo", 2018, 11, 28, "\"Modulo\", italian noun for \"Module\". Oh wait, the \"Modulo\" operation? Nevermind then."));
         flavorTexts.add(new FlavorTextObject("Modulus Manipulation", 2019, 5, 16, "Yes, the remainder of the division, not the result of it."));
         flavorTexts.add(new FlavorTextObject("Monsplode, Fight!", 2016, 10, 8, "A wild Monsplode appears. What will you do?\nBy the way: you can't run away."));
@@ -421,7 +421,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("osu!", 2020, 3, 12, "And this is how the emulator of a game becomes more popular than the game itself."));
         flavorTexts.add(new FlavorTextObject("Painting", 2017, 9, 24, "Who knew that BOB was an artist?"));
         flavorTexts.add(new FlavorTextObject("Partial Derivatives", 2019, 8, 4, "And at this point I started hating math a little bit."));
-        flavorTexts.add(new FlavorTextObject("Party Time", 2018, 10, 18, "The Venga bus is comin', and everybody's jumpin', New York through San Fransisco, an interstate free disco."));
+        flavorTexts.add(new FlavorTextObject("Party Time", 2018, 10, 18, "The Venga bus is comin', and everybody's jumpin', New York through San Francisco, an interstate free disco."));
         flavorTexts.add(new FlavorTextObject("Passcodes", 2019, 12, 22, "Password codes. Passwords. I think I get it."));
         flavorTexts.add(new FlavorTextObject("Passport Control", 2019, 1, 30, "I wonder when Jorji will come."));
         flavorTexts.add(new FlavorTextObject("Password Generator", 2020, 2, 13, "I mean, there are good tips on the internet for making some. Also, using the \"L337 language\" would help."));
@@ -452,11 +452,11 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Prime Checker", 2019, 7, 17, "Prime number: a number that can be divided only by 1 and itself."));
         flavorTexts.add(new FlavorTextObject("Prime Encryption", 2019, 12, 24, "I mean, it's just 2 numbers multiplied by each other, what's the problem? Oh, right, too many numbers."));
         flavorTexts.add(new FlavorTextObject("Probing", 2016, 9, 2, "So, how do you use that thing again?"));
-        flavorTexts.add(new FlavorTextObject("Purgatory", 2019, 2, 20, "To course across more kindly waters now my talent's little vessel lifts her sials, leaving behind herself a sea so cruel; and what I sing will be that second kingdom, in which the human soul is cleansed of sin, becoming worthy of ascent to Heaven."));
+        flavorTexts.add(new FlavorTextObject("Purgatory", 2019, 2, 20, "To course across more kindly waters now my talent's little vessel lifts her sails, leaving behind herself a sea so cruel; and what I sing will be that second kingdom, in which the human soul is cleansed of sin, becoming worthy of ascent to Heaven."));
         flavorTexts.add(new FlavorTextObject("Purple Arrows", 2019, 6, 16, "Welp, by the looks of it the whole Arrows module thing was to celebrate Pride Month. Only when this module (which is the last one) got released people noticed. Well played."));
         flavorTexts.add(new FlavorTextObject("Quaternions", 2020, 3, 9, "This may take a while, gotta use paper and pen. And a calculator."));
         flavorTexts.add(new FlavorTextObject("Question Mark", 2019, 1, 8, "The legend says that the block came from the Super Mario franchise."));
-        flavorTexts.add(new FlavorTextObject("Quick Arithmetic", 2020, 3, 17, "I mean, the way the numbers are shown is similar to how you yead them number by number. Kind of."));
+        flavorTexts.add(new FlavorTextObject("Quick Arithmetic", 2020, 3, 17, "I mean, the way the numbers are shown is similar to how you read them number by number. Kind of."));
         flavorTexts.add(new FlavorTextObject("Quintuples", 2019, 9, 23, "-\"5 for Vendetta.\"\n-\"What?\"\n-\"You know, 5 in Roman Numerals is V, and the film is centered around the 5th of November.\"\n-*facepalms*"));
         flavorTexts.add(new FlavorTextObject("Quiz Buzz", 2019, 2, 24, "Or, as it looks like it: when FizzBuzz becomes a TV show."));
         flavorTexts.add(new FlavorTextObject("Qwirkle", 2019, 7, 11, "What's next? Cluedo? Monopoly? Oh, wait..."));
@@ -498,7 +498,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Sea Shells", 2016, 11, 6, "\"Eeehm, Shish.\""));
         flavorTexts.add(new FlavorTextObject("Semamorse", 2020, 1, 25, "Oh, now I get it why it is called this way."));
         flavorTexts.add(new FlavorTextObject("Semaphore", 2016, 7, 13, "Message from the sea. Maybe it's important. Look and see what they want."));
-        flavorTexts.add(new FlavorTextObject("Sequences", 2020, 3, 7, "I mean, it's a basic mathematical operation puzzle, people should know that multipication comes before addition."));
+        flavorTexts.add(new FlavorTextObject("Sequences", 2020, 3, 7, "I mean, it's a basic mathematical operation puzzle, people should know that multiplication comes before addition."));
         flavorTexts.add(new FlavorTextObject("S.E.T.", 2017, 9, 23, "More logic-based modules? Ok, I'm in."));
         flavorTexts.add(new FlavorTextObject("Settlers of KTaNE", 2020, 2, 26, "Featuring: Wil Wheaton. No, wait, it's not Catan."));
         flavorTexts.add(new FlavorTextObject("Seven Choose Four", 2019, 11, 19, "Oh, it's because it's about seven colours. I see."));
@@ -533,7 +533,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Sink", 2018, 2, 9, "Where does the water even come from?"));
         flavorTexts.add(new FlavorTextObject("Skewed Slots", 2016, 9, 15, "Hey, look, even more math to do!"));
         flavorTexts.add(new FlavorTextObject("Skinny Wires", 2018, 12, 24, "So small they eat anything without putting on fat during festivities."));
-        flavorTexts.add(new FlavorTextObject("Skyrim", 2018, 3, 2, "Dragonborn, dragonorn, by his honor is sworn, to keep evil forever at bay! And the fiercest foes rout when they hear triumph's shout, Dragonborn, for your blessing we pray!"));
+        flavorTexts.add(new FlavorTextObject("Skyrim", 2018, 3, 2, "Dragonborn, Dragonborn, by his honor is sworn, to keep evil forever at bay! And the fiercest foes rout when they hear triumph's shout, Dragonborn, for your blessing we pray!"));
         flavorTexts.add(new FlavorTextObject("Snakes and Ladders", 2019, 7, 27, "I think I've seen this game on the back of some cereal package."));
         flavorTexts.add(new FlavorTextObject("Snooker", 2018, 10, 10, "Ronnie O'Sullivan approved, I guess."));
         flavorTexts.add(new FlavorTextObject("Sonic & Knuckles", 2018, 9, 19, "And this time with no expansion pack. Right?"));
@@ -706,7 +706,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Simon Squawks", 2019, 1, 5, "So many Simons, are we sure it's the same person every single time?"));
         flavorTexts.add(new FlavorTextObject("Simon's Sequence", 2019, 1, 21, "Make sure you don't forget a single color."));
         flavorTexts.add(new FlavorTextObject("Snap!", 2019, 4, 5, "No, this is not related to wire cutting."));
-        flavorTexts.add(new FlavorTextObject("Speak English", 2019, 2, 27, "All those tourists that instist on speaking their native tongue in a foreign nation really angers me."));
+        flavorTexts.add(new FlavorTextObject("Speak English", 2019, 2, 27, "All those tourists that insist on speaking their native tongue in a foreign nation really angers me."));
         flavorTexts.add(new FlavorTextObject("Ten Seconds", 2019, 7, 8, "It kind of reminds me of whack-a-mole."));
         flavorTexts.add(new FlavorTextObject("Terraria Quiz", 2019, 5, 11, "And that game is in my \"maybe to play\" list."));
         flavorTexts.add(new FlavorTextObject("Tetris", 2016, 8, 23, "Sure, clear some lines between a module or two."));
