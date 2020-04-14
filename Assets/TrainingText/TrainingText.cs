@@ -147,48 +147,65 @@ public class TrainingText : MonoBehaviour {
         else
             correctState = "AM";
 
+        correctHour = correctHour % 12;
         Debug.LogFormat("[Training Text #{0}] The unmodified time is {1}:{2} {3}", moduleId, correctHour, FormatMinutes(correctMinute), correctState);
+        if (correctHour == 12)
+            correctHour = 0;
+
 
         // Modifies the time
+        bool rulesApplied = false;
+
         if (module.getYear() < 2017) {
             correctMinute += 45;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] The module was released before 2017. (+45 minutes)", moduleId);
         }
 
         if (module.getHasQuotes() == true) {
             correctMinute += 20;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] The module's flavor text has quotation marks. (+20 minutes)", moduleId);
         }
 
         if (module.getStartsDP() == true) {
             correctMinute -= 30;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] The module's name starts with a letter between D and P. (-30 minutes)", moduleId);
         }
 
         if (module.getIsMonday() == true) {
             correctHour -= 5;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] The module was released on a Monday. (-5 hours)", moduleId);
         }
 
         if (Bomb.GetSolvableModuleNames().Count(x => x.Contains("Training Text")) > 1) {
             correctHour++;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] There is another Training Text module on the bomb. (+1 hour)", moduleId);
         }
 
         if (hasSerialPort == true) {
             correctMinute += 5;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] The bomb has a serial port. (+5 minutes)", moduleId);
         }
 
         if (hasEmptyPlate == true) {
             correctMinute -= 90;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] The bomb has an empty port plate. (-90 minutes)", moduleId);
         }
 
         if (batteryCount == 0) {
             correctMinute -= 10;
+            rulesApplied = true;
             Debug.LogFormat("[Training Text #{0}] The bomb has no batteries. (-10 minutes)", moduleId);
         }
+
+        if (rulesApplied == false)
+            Debug.LogFormat("[Training Text #{0}] No rules from Step 3 applied.", moduleId);
 
 
         // Catches rollovers in the time
@@ -292,8 +309,8 @@ public class TrainingText : MonoBehaviour {
         bool correct = false;
 
         if (moduleSolved == false) {
-            // If the current day is not Friday
-            if (DateTime.Now.DayOfWeek.ToString() != "Friday") {
+            // If the correct time can be reached within the bomb's remaining time
+            if (DateTime.Now.DayOfWeek.ToString() != "Friday" && ZenModeActive == false) {
                 // Gets the real time left on the bomb's timer
                 bombTime = Math.Floor(Bomb.GetTime());
                 strikes = Bomb.GetStrikes();
@@ -498,4 +515,8 @@ public class TrainingText : MonoBehaviour {
             DisplayCurrentTime();
         }
     }
+
+#pragma warning disable 414
+    private bool ZenModeActive;
+#pragma warning restore 414
 }
