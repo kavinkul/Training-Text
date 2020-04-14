@@ -117,12 +117,6 @@ public class TrainingText : MonoBehaviour {
         Debug.LogFormat("[Training Text #{0}] The flavor text is: {1}", moduleId, modifiedFlavorText);
         Debug.LogFormat("[Training Text #{0}] The module was released on {1}/{2}/{3}.", moduleId, module.getMonth(), module.getDay(), module.getYear());
 
-        if (module.getIsMonday() == true)
-            Debug.LogFormat("[Training Text #{0}] The module was released on a Monday.", moduleId);
-
-        else
-            Debug.LogFormat("[Training Text #{0}] The module was not released on a Monday.", moduleId);
-
 
         // Sets a random time on the clock
         currentHour = UnityEngine.Random.Range(1, 13);
@@ -153,31 +147,48 @@ public class TrainingText : MonoBehaviour {
         else
             correctState = "AM";
 
+        Debug.LogFormat("[Training Text #{0}] The unmodified time is {1}:{2} {3}", moduleId, correctHour, FormatMinutes(correctMinute), correctState);
 
         // Modifies the time
-        if (module.getYear() < 2017)
+        if (module.getYear() < 2017) {
             correctMinute += 45;
+            Debug.LogFormat("[Training Text #{0}] The module was released before 2017. (+45 minutes)", moduleId);
+        }
 
-        if (module.getHasQuotes() == true)
+        if (module.getHasQuotes() == true) {
             correctMinute += 20;
+            Debug.LogFormat("[Training Text #{0}] The module's flavor text has quotation marks. (+20 minutes)", moduleId);
+        }
 
-        if (module.getStartsDP() == true)
+        if (module.getStartsDP() == true) {
             correctMinute -= 30;
+            Debug.LogFormat("[Training Text #{0}] The module's name starts with a letter between D and P. (-30 minutes)", moduleId);
+        }
 
-        if (module.getIsMonday() == true)
+        if (module.getIsMonday() == true) {
             correctHour -= 5;
+            Debug.LogFormat("[Training Text #{0}] The module was released on a Monday. (-5 hours)", moduleId);
+        }
 
-        if (Bomb.GetSolvableModuleNames().Count(x => x.Contains("Training Text")) > 1)
+        if (Bomb.GetSolvableModuleNames().Count(x => x.Contains("Training Text")) > 1) {
             correctHour++;
+            Debug.LogFormat("[Training Text #{0}] There is another Training Text module on the bomb. (+1 hour)", moduleId);
+        }
 
-        if (hasSerialPort == true)
+        if (hasSerialPort == true) {
             correctMinute += 5;
+            Debug.LogFormat("[Training Text #{0}] The bomb has a serial port. (+5 minutes)", moduleId);
+        }
 
-        if (hasEmptyPlate == true)
+        if (hasEmptyPlate == true) {
             correctMinute -= 90;
+            Debug.LogFormat("[Training Text #{0}] The bomb has an empty port plate. (-90 minutes)", moduleId);
+        }
 
-        if (batteryCount == 0)
+        if (batteryCount == 0) {
             correctMinute -= 10;
+            Debug.LogFormat("[Training Text #{0}] The bomb has no batteries. (-10 minutes)", moduleId);
+        }
 
 
         // Catches rollovers in the time
@@ -215,6 +226,7 @@ public class TrainingText : MonoBehaviour {
 
         // If the specified module is on the bomb
         if (Bomb.GetSolvableModuleNames().Count(x => x.Contains(module.getModuleName())) > 0) {
+            Debug.LogFormat("[Training Text #{0}] The time after Step 3 is {1}:{2} {3}", moduleId, correctHour, FormatMinutes(correctMinute), correctState);
             Debug.LogFormat("[Training Text #{0}] The module selected is present on the bomb.", moduleId);
 
             correctHour = (correctHour + 6) % 12;
