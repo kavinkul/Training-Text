@@ -343,7 +343,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Maritime Flags", 2018, 7, 10, "But if you can't find where you put the flags, how you will communicate?"));
         flavorTexts.add(new FlavorTextObject("Mashematics", 2018, 2, 3, "Hey, look, even more math."));
         flavorTexts.add(new FlavorTextObject("Mastermind Simple", 2017, 8, 6, "Well, this module came out in two versions. And here you'll train with the easier version. Have fun."));
-        flavorTexts.add(new FlavorTextObject("Mastermind Cruel", 2017, 8, 6, "Well, this module came out in two versions. And here you'll train with the harder version. What does make this hard? Well, just try it out"));
+        flavorTexts.add(new FlavorTextObject("Mastermind Cruel", 2017, 8, 6, "Well, this module came out in two versions. And here you'll train with the harder version. What does make this hard? Well, just try it out."));
         flavorTexts.add(new FlavorTextObject("Masyu", 2019, 8, 31, "Masy-what?"));
         flavorTexts.add(new FlavorTextObject("Matchematics", 2019, 8, 19, "Be careful to not light them up."));
         flavorTexts.add(new FlavorTextObject("Matricies", 2019, 12, 29, "Also known as what I studied for a semester an a half and then forgot most of it."));
