@@ -596,7 +596,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("The Triangle Button", 2019, 4, 11, "What's next? A dodecagon button?"));
         flavorTexts.add(new FlavorTextObject("The Troll", 2019, 3, 9, "You know: I am very glad, as I'm finally returning back home. Especially after defusing a bomb."));
         flavorTexts.add(new FlavorTextObject("Turn The Key", 2016, 8, 20, "Keep an eye on the timer, ok?"));
-        flavorTexts.add(new FlavorTextObject("Turn The Keys", 2016, 8, 20, "To do this module, you must do some of the other modules first, so here we are. Plan the defusing order RIGHT."));
+        flavorTexts.add(new FlavorTextObject("Turn The Keys", 2016, 8, 25, "To do this module, you must do some of the other modules first, so here we are. Plan the defusing order RIGHT."));
         flavorTexts.add(new FlavorTextObject("Turtle Robot", 2018, 6, 8, "Is this LUA or something like that?"));
         flavorTexts.add(new FlavorTextObject("Two Bits", 2016, 7, 26, "These old school modules can only process 2 bits at a time.\n\nOk, that was a bad pun..."));
         flavorTexts.add(new FlavorTextObject("Übermodule", 2019, 9, 29, "\"I am ze Ubermensch!\"\n- Medic, TF2"));
