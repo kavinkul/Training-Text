@@ -39,7 +39,7 @@ public class AllFlavorTexts {
         flavorTexts.add(new FlavorTextObject("Alphabetize", 2020, 2, 17, "Question: which alphabet?"));
         flavorTexts.add(new FlavorTextObject("Anagrams", 2016, 7, 28, "If you can't English then good luck."));
         flavorTexts.add(new FlavorTextObject("Word Scramble", 2016, 7, 18, "If you can't English then good luck."));
-        flavorTexts.add(new FlavorTextObject("Answer to ...", 2020, 3, 14, "To what? Did the connection cut out?"));
+        flavorTexts.add(new FlavorTextObject("Answer to...", 2020, 3, 14, "To what? Did the connection cut out?"));
         flavorTexts.add(new FlavorTextObject("Answering Can Be Fun", 2019, 12, 18, "Even when bombs are involved, because you'll have a blast at it."));
         flavorTexts.add(new FlavorTextObject("Antichamber", 2019, 7, 12, "My head hurts. Maybe it will stop after the bomb, one way or another."));
         flavorTexts.add(new FlavorTextObject("Arithmelogic", 2019, 5, 3, "I'm lost right now."));
