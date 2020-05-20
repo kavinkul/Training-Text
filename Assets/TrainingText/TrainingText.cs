@@ -96,12 +96,6 @@ public class TrainingText : MonoBehaviour {
         module = flavorTexts.getRandomFlavorText();
 
         // Prevents duplicate flavor texts from showing up if their modules are on the bomb
-        while ((Bomb.GetModuleNames().Count(x => x.Contains("Anagrams")) > 0 ||
-            Bomb.GetModuleNames().Count(x => x.Contains("Word Scramble")) > 0) &&
-            (module.getModuleName() == "Anagrams" || module.getModuleName() == "Word Scramble")) {
-            module = flavorTexts.getRandomFlavorText();
-        }
-
         while ((Bomb.GetModuleNames().Count(x => x.Contains("Needy Vent Gas")) > 0 ||
             Bomb.GetModuleNames().Count(x => x.Contains("Needy Capacitor")) > 0 ||
             Bomb.GetModuleNames().Count(x => x.Contains("Needy Knob")) > 0) &&
