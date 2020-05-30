@@ -95,14 +95,6 @@ public class TrainingText : MonoBehaviour {
         flavorTexts = AllFlavorTexts.AddFlavorTexts();
         module = flavorTexts.getRandomFlavorText();
 
-        // Prevents duplicate flavor texts from showing up if their modules are on the bomb
-        while ((Bomb.GetModuleNames().Count(x => x.Contains("Needy Vent Gas")) > 0 ||
-            Bomb.GetModuleNames().Count(x => x.Contains("Needy Capacitor")) > 0 ||
-            Bomb.GetModuleNames().Count(x => x.Contains("Needy Knob")) > 0) &&
-            (module.getModuleName() == "Needy Vent Gas" || module.getModuleName() == "Needy Capacitor" || module.getModuleName() == "Needy Knob")) {
-            module = flavorTexts.getRandomFlavorText();
-        }
-
         // Formats the flavor text for logging
         string modifiedFlavorText = module.getFlavorText();
         modifiedFlavorText = modifiedFlavorText.Replace('\n', ' ');
