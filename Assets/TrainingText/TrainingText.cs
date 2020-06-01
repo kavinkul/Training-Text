@@ -295,6 +295,8 @@ public class TrainingText : MonoBehaviour {
         bool correct = false;
 
         if (moduleSolved == false) {
+            Debug.LogFormat("[Training Text #{0}] You submitted {1}:{2} {3}.", moduleId, currentHour, FormatMinutes(currentMinute), currentState);
+
             // If the correct time can be reached within the bomb's remaining time
             if (DateTime.Now.DayOfWeek.ToString() != "Friday" && ZenModeActive == false) {
                 // Gets the real time left on the bomb's timer
@@ -316,6 +318,18 @@ public class TrainingText : MonoBehaviour {
                 realHour = DateTime.Now.Hour;
                 realMinute = DateTime.Now.Minute;
                 realSecond = DateTime.Now.Second;
+
+                if (realHour == 0)
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} AM.", moduleId, FormatMinutes(realMinute));
+
+                else if (realHour == 12)
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} PM.", moduleId, FormatMinutes(realMinute));
+
+                else if (realHour > 12)
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} PM.", moduleId, realHour - 12, FormatMinutes(realMinute));
+                
+                else
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} AM.", moduleId, realHour, FormatMinutes(realMinute));
 
                 // Adds the bomb's timer to the real time to get the finishing time
                 finishingHour = realHour;
@@ -351,6 +365,19 @@ public class TrainingText : MonoBehaviour {
 
                 if (modifiedFinishingHour < realHour)
                     modifiedFinishingHour += 24;
+
+
+                if (modifiedFinishingHour % 24 == 0)
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} AM.", moduleId, FormatMinutes(finishingMinute));
+
+                else if (modifiedFinishingHour % 24 == 12)
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} PM.", moduleId, FormatMinutes(finishingMinute), FormatMinutes(finishingSecond));
+
+                else if (modifiedFinishingHour % 24 > 12)
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} PM.", moduleId, (modifiedFinishingHour - 12) % 24, FormatMinutes(finishingMinute));
+
+                else
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} AM.", moduleId, modifiedFinishingHour % 24, FormatMinutes(finishingMinute));
 
 
                 if (realHour < modifiedCorrectHour && modifiedCorrectHour < modifiedFinishingHour)
