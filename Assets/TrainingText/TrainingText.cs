@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using KModkit;
+using System.Text.RegularExpressions;
 
 public class TrainingText : MonoBehaviour {
     public KMAudio Audio;
@@ -529,7 +530,145 @@ public class TrainingText : MonoBehaviour {
         }
     }
 
-#pragma warning disable 414
+    #pragma warning disable 414
     private bool ZenModeActive;
-#pragma warning restore 414
+    #pragma warning restore 414
+
+    //twitch plays
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"!{0} hours/minutes <forward/backward> <#> [Adjusts the hours or minutes forward or backward on the clock by '#'] | !{0} submit [Submits the current time on the clock] | !{0} set <#:##/##:##> <AM/PM> [Sets the specified time in #:## or ##:## format to AM or PM on the clock and submits it]";
+    #pragma warning restore 414
+
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        if (Regex.IsMatch(command, @"^\s*submit\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        {
+            yield return null;
+            SubmitButton.OnInteract();
+            yield break;
+        }
+        string[] parameters = command.Split(' ');
+        if (Regex.IsMatch(parameters[0], @"^\s*hours\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        {
+            yield return null;
+            if (parameters.Length > 3)
+            {
+                yield return "sendtochaterror Too many parameters!";
+            }
+            else if (parameters.Length == 3)
+            {
+                int hrs = 0;
+                bool parsed = int.TryParse(parameters[2], out hrs);
+                if (parameters[1].EqualsIgnoreCase("forward") || parameters[1].EqualsIgnoreCase("backward"))
+                {
+                    if (parsed)
+                    {
+                        if (hrs > -1)
+                        {
+                            for (int i = 0; i < hrs % 24; i++)
+                            {
+                                if (parameters[1].EqualsIgnoreCase("forward"))
+                                {
+                                    TimeButtons[0].OnInteract();
+                                    yield return new WaitForSeconds(0.1f);
+                                }
+                                else
+                                {
+                                    TimeButtons[1].OnInteract();
+                                    yield return new WaitForSeconds(0.1f);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be greater than -1!";
+                        }
+                    }
+                    else
+                    {
+                        yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be an number!";
+                    }
+                }
+                else
+                {
+                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
+                }
+            }
+            else if (parameters.Length == 2)
+            {
+                if (parameters[1].EqualsIgnoreCase("forward"))
+                    yield return "sendtochaterror Please specify how many hours forward you would like to go!";
+                else if (parameters[1].EqualsIgnoreCase("backward"))
+                    yield return "sendtochaterror Please specify how many hours backward you would like to go!";
+                else
+                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
+            }
+            else if (parameters.Length == 1)
+            {
+                yield return "sendtochaterror Please specify whether you would like to go forward or backward and how many hours to!";
+            }
+            yield break;
+        }
+        if (Regex.IsMatch(parameters[0], @"^\s*minutes\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        {
+            yield return null;
+            if (parameters.Length > 3)
+            {
+                yield return "sendtochaterror Too many parameters!";
+            }
+            else if (parameters.Length == 3)
+            {
+                int mins = 0;
+                bool parsed = int.TryParse(parameters[2], out mins);
+                if (parameters[1].EqualsIgnoreCase("forward") || parameters[1].EqualsIgnoreCase("backward"))
+                {
+                    if (parsed)
+                    {
+                        if (mins > -1)
+                        {
+                            for (int i = 0; i < mins % 60; i++)
+                            {
+                                if (parameters[1].EqualsIgnoreCase("forward"))
+                                {
+                                    TimeButtons[2].OnInteract();
+                                    yield return new WaitForSeconds(0.1f);
+                                }
+                                else
+                                {
+                                    TimeButtons[3].OnInteract();
+                                    yield return new WaitForSeconds(0.1f);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be greater than -1!";
+                        }
+                    }
+                    else
+                    {
+                        yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be an number!";
+                    }
+                }
+                else
+                {
+                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
+                }
+            }
+            else if (parameters.Length == 2)
+            {
+                if (parameters[1].EqualsIgnoreCase("forward"))
+                    yield return "sendtochaterror Please specify how many minutes forward you would like to go!";
+                else if (parameters[1].EqualsIgnoreCase("backward"))
+                    yield return "sendtochaterror Please specify how many minutes backward you would like to go!";
+                else
+                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
+            }
+            else if (parameters.Length == 1)
+            {
+                yield return "sendtochaterror Please specify whether you would like to go forward or backward and how many minutes to!";
+            }
+            yield break;
+        }
+    }
 }
