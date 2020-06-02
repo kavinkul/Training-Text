@@ -95,20 +95,6 @@ public class TrainingText : MonoBehaviour {
         flavorTexts = AllFlavorTexts.AddFlavorTexts();
         module = flavorTexts.getRandomFlavorText();
 
-        // Prevents duplicate flavor texts from showing up if their modules are on the bomb
-        while ((Bomb.GetModuleNames().Count(x => x.Contains("Anagrams")) > 0 ||
-            Bomb.GetModuleNames().Count(x => x.Contains("Word Scramble")) > 0) &&
-            (module.getModuleName() == "Anagrams" || module.getModuleName() == "Word Scramble")) {
-            module = flavorTexts.getRandomFlavorText();
-        }
-
-        while ((Bomb.GetModuleNames().Count(x => x.Contains("Needy Vent Gas")) > 0 ||
-            Bomb.GetModuleNames().Count(x => x.Contains("Needy Capacitor")) > 0 ||
-            Bomb.GetModuleNames().Count(x => x.Contains("Needy Knob")) > 0) &&
-            (module.getModuleName() == "Needy Vent Gas" || module.getModuleName() == "Needy Capacitor" || module.getModuleName() == "Needy Knob")) {
-            module = flavorTexts.getRandomFlavorText();
-        }
-
         // Formats the flavor text for logging
         string modifiedFlavorText = module.getFlavorText();
         modifiedFlavorText = modifiedFlavorText.Replace('\n', ' ');
@@ -309,6 +295,8 @@ public class TrainingText : MonoBehaviour {
         bool correct = false;
 
         if (moduleSolved == false) {
+            Debug.LogFormat("[Training Text #{0}] You submitted {1}:{2} {3}.", moduleId, currentHour, FormatMinutes(currentMinute), currentState);
+
             // If the correct time can be reached within the bomb's remaining time
             if (DateTime.Now.DayOfWeek.ToString() != "Friday" && ZenModeActive == false) {
                 // Gets the real time left on the bomb's timer
@@ -330,6 +318,18 @@ public class TrainingText : MonoBehaviour {
                 realHour = DateTime.Now.Hour;
                 realMinute = DateTime.Now.Minute;
                 realSecond = DateTime.Now.Second;
+
+                if (realHour == 0)
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} AM.", moduleId, FormatMinutes(realMinute));
+
+                else if (realHour == 12)
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} PM.", moduleId, FormatMinutes(realMinute));
+
+                else if (realHour > 12)
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} PM.", moduleId, realHour - 12, FormatMinutes(realMinute));
+                
+                else
+                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} AM.", moduleId, realHour, FormatMinutes(realMinute));
 
                 // Adds the bomb's timer to the real time to get the finishing time
                 finishingHour = realHour;
@@ -365,6 +365,19 @@ public class TrainingText : MonoBehaviour {
 
                 if (modifiedFinishingHour < realHour)
                     modifiedFinishingHour += 24;
+
+
+                if (modifiedFinishingHour % 24 == 0)
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} AM.", moduleId, FormatMinutes(finishingMinute));
+
+                else if (modifiedFinishingHour % 24 == 12)
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} PM.", moduleId, FormatMinutes(finishingMinute), FormatMinutes(finishingSecond));
+
+                else if (modifiedFinishingHour % 24 > 12)
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} PM.", moduleId, (modifiedFinishingHour - 12) % 24, FormatMinutes(finishingMinute));
+
+                else
+                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} AM.", moduleId, modifiedFinishingHour % 24, FormatMinutes(finishingMinute));
 
 
                 if (realHour < modifiedCorrectHour && modifiedCorrectHour < modifiedFinishingHour)

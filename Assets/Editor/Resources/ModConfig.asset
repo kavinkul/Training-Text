@@ -14,7 +14,7 @@ MonoBehaviour:
   id: TrainingText
   title: Training Text
   author: Espik
-  description: 'Training Text v1.0
+  description: 'Training Text v1.201
 
     "Take the time to pay attention and respect its beauty."
 
@@ -26,6 +26,6 @@ MonoBehaviour:
 
 
     Source Code: https://github.com/Espik/Training-Text'
-  version: v1.0
+  version: v1.201
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 92d90bf05e285ba47a5f1774eaadcbac, type: 3}
