@@ -534,7 +534,10 @@ public class TrainingText : MonoBehaviour {
     private bool ZenModeActive;
     #pragma warning restore 414
 
-    //twitch plays
+
+    // Twitch Plays Support - Thanks to eXish
+    
+        
     #pragma warning disable 414
     private readonly string TwitchHelpMessage = @"!{0} hours/minutes <forward/backward> <#> [Adjusts the hours or minutes forward or backward on the clock by '#'] | !{0} submit [Submits the current time on the clock] | !{0} set <#:##/##:##> <AM/PM> [Sets the specified time in #:## or ##:## format to AM or PM on the clock and submits it]";
     #pragma warning restore 414
