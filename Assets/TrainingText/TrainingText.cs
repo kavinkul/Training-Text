@@ -551,7 +551,7 @@ public class TrainingText : MonoBehaviour {
     #pragma warning restore 414
 
 
-    // Twitch Plays Support - Thanks to eXish
+    // Twitch Plays Support - Thanks to eXish & kavinkul
     
         
     #pragma warning disable 414
