@@ -290,13 +290,16 @@ public class TrainingText : MonoBehaviour {
 
 
     // Submit button pressed
-    private void SubmitButtonPressed() {
-        SubmitButton.AddInteractionPunch();
-        Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, gameObject.transform);
+    private void SubmitButtonPressed(bool autoSolverFindAnswer = false) {
+        if (!autoSolverFindAnswer) {
+            SubmitButton.AddInteractionPunch();
+            Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, gameObject.transform);
+        }
         bool correct = false;
 
         if (moduleSolved == false) {
-            Debug.LogFormat("[Training Text #{0}] You submitted {1}:{2} {3}.", moduleId, currentHour, FormatMinutes(currentMinute), currentState);
+            if (!autoSolverFindAnswer)
+                Debug.LogFormat("[Training Text #{0}] You submitted {1}:{2} {3}.", moduleId, currentHour, FormatMinutes(currentMinute), currentState);
 
             // If the correct time can be reached within the bomb's remaining time
             if (DateTime.Now.DayOfWeek.ToString() != "Friday" && ZenModeActive == false) {
@@ -306,11 +309,11 @@ public class TrainingText : MonoBehaviour {
 
                 // Modifies the bomb time with strikes
                 switch (strikes) {
-                case 0: break;
-                case 1: bombTime /= 1.25; break;
-                case 2: bombTime /= 1.5; break;
-                case 3: bombTime /= 1.75; break;
-                default: bombTime /= 2; break;
+                    case 0: break;
+                    case 1: bombTime /= 1.25; break;
+                    case 2: bombTime /= 1.5; break;
+                    case 3: bombTime /= 1.75; break;
+                    default: bombTime /= 2; break;
                 }
 
                 roundedBombTime = (int) Math.Floor(bombTime);
@@ -320,17 +323,19 @@ public class TrainingText : MonoBehaviour {
                 realMinute = DateTime.Now.Minute;
                 realSecond = DateTime.Now.Second;
 
-                if (realHour == 0)
-                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} AM.", moduleId, FormatMinutes(realMinute));
+                if (!autoSolverFindAnswer) {
+                    if (realHour == 0)
+                        Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} AM.", moduleId, FormatMinutes(realMinute));
 
-                else if (realHour == 12)
-                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} PM.", moduleId, FormatMinutes(realMinute));
+                    else if (realHour == 12)
+                        Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was 12:{1} PM.", moduleId, FormatMinutes(realMinute));
 
-                else if (realHour > 12)
-                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} PM.", moduleId, realHour - 12, FormatMinutes(realMinute));
-                
-                else
-                    Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} AM.", moduleId, realHour, FormatMinutes(realMinute));
+                    else if (realHour > 12)
+                        Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} PM.", moduleId, realHour - 12, FormatMinutes(realMinute));
+
+                    else
+                        Debug.LogFormat("[Training Text #{0}] The current local time when pressing the button was {1}:{2} AM.", moduleId, realHour, FormatMinutes(realMinute));
+                }
 
                 // Adds the bomb's timer to the real time to get the finishing time
                 finishingHour = realHour;
@@ -368,17 +373,19 @@ public class TrainingText : MonoBehaviour {
                     modifiedFinishingHour += 24;
 
 
-                if (modifiedFinishingHour % 24 == 0)
-                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} AM.", moduleId, FormatMinutes(finishingMinute));
+                if (!autoSolverFindAnswer) {
+                    if (modifiedFinishingHour % 24 == 0)
+                        Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} AM.", moduleId, FormatMinutes(finishingMinute));
 
-                else if (modifiedFinishingHour % 24 == 12)
-                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} PM.", moduleId, FormatMinutes(finishingMinute), FormatMinutes(finishingSecond));
+                    else if (modifiedFinishingHour % 24 == 12)
+                        Debug.LogFormat("[Training Text #{0}] The bomb will finish at 12:{1} PM.", moduleId, FormatMinutes(finishingMinute), FormatMinutes(finishingSecond));
 
-                else if (modifiedFinishingHour % 24 > 12)
-                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} PM.", moduleId, (modifiedFinishingHour - 12) % 24, FormatMinutes(finishingMinute));
+                    else if (modifiedFinishingHour % 24 > 12)
+                        Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} PM.", moduleId, (modifiedFinishingHour - 12) % 24, FormatMinutes(finishingMinute));
 
-                else
-                    Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} AM.", moduleId, modifiedFinishingHour % 24, FormatMinutes(finishingMinute));
+                    else
+                        Debug.LogFormat("[Training Text #{0}] The bomb will finish at {1}:{2} AM.", moduleId, modifiedFinishingHour % 24, FormatMinutes(finishingMinute));
+                }
 
 
                 if (realHour < modifiedCorrectHour && modifiedCorrectHour < modifiedFinishingHour)
@@ -396,13 +403,16 @@ public class TrainingText : MonoBehaviour {
 
                 // Time is not reached
                 if (timeReached == false) {
+                    submitCorrectTime = true;
                     if (currentHour == correctHour && currentMinute == correctMinute && currentState == correctState)
                         correct = true;
                 }
-                
+
                 // Time is reached
                 else {
-                    Debug.LogFormat("[Training Text #{0}] Note that the correct answer time could be reached in the bomb's remaining time when the button was pressed.", moduleId);
+                    submitCorrectTime = false;
+                    if (!autoSolverFindAnswer)
+                        Debug.LogFormat("[Training Text #{0}] Note that the correct answer time could be reached in the bomb's remaining time when the button was pressed.", moduleId);
                     actualCorrectTime = finishingMinute + finishingHour * 60;
                     actualCurrentTime = currentMinute + currentHour * 60;
 
@@ -424,38 +434,44 @@ public class TrainingText : MonoBehaviour {
             }
 
 
-            else if (currentHour == correctHour && currentMinute == correctMinute && currentState == correctState)
+            else if (currentHour == correctHour && currentMinute == correctMinute && currentState == correctState) {
+                submitCorrectTime = true;
                 correct = true;
-
-            if (DateTime.Now.DayOfWeek.ToString() == "Friday") {
-                Debug.LogFormat("[Training Text #{0}] Note that it was Friday when the button was pressed.", moduleId);
             }
+            answerIsCorrect = correct;
+            if (!autoSolverFindAnswer) {
+                if (DateTime.Now.DayOfWeek.ToString() == "Friday") {
+                    Debug.LogFormat("[Training Text #{0}] Note that it was Friday when the button was pressed.", moduleId);
+                }
 
 
-            // Correct answer
-            if (correct == true) {
-                Debug.LogFormat("[Training Text #{0}] Module solved!", moduleId);
-                GetComponent<KMBombModule>().HandlePass();
-                Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.CorrectChime, gameObject.transform);
-                moduleSolved = true;
-            }
+                // Correct answer
+                if (correct == true) {
+                    Debug.LogFormat("[Training Text #{0}] Module solved!", moduleId);
+                    GetComponent<KMBombModule>().HandlePass();
+                    Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.CorrectChime, gameObject.transform);
+                    moduleSolved = true;
+                }
 
-            // Incorrect answer
-            else {
-                Debug.LogFormat("[Training Text #{0}] Strike!", moduleId);
-                GetComponent<KMBombModule>().HandleStrike();
+                // Incorrect answer
+                else {
+                    Debug.LogFormat("[Training Text #{0}] Strike!", moduleId);
+                    GetComponent<KMBombModule>().HandleStrike();
+                }
             }
         }
 
-        // Displays the module name on the top screen
-        if (displayingModuleName == false) {
-            displayingModuleName = true;
+        if (!autoSolverFindAnswer) {
+            // Displays the module name on the top screen
+            if (displayingModuleName == false) {
+                displayingModuleName = true;
 
-            if (correct == true)
-                AnswerText.text = module.getModuleName();
+                if (correct == true)
+                    AnswerText.text = module.getModuleName();
 
-            else
-                StartCoroutine(ModuleNameFlash());
+                else
+                    StartCoroutine(ModuleNameFlash());
+            }
         }
     }
 
@@ -539,139 +555,114 @@ public class TrainingText : MonoBehaviour {
     
         
     #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"!{0} hours/minutes <forward/backward> <#> [Adjusts the hours or minutes forward or backward on the clock by '#'] | !{0} submit [Submits the current time on the clock] | !{0} set <#:##/##:##> <AM/PM> [Sets the specified time in #:## or ##:## format to AM or PM on the clock and submits it]";
+    private readonly string TwitchHelpMessage = @"!{0} hours/minutes <forward/backward> <#> [Adjusts the hours or minutes forward or backward on the clock by '#' (Hours and minutes will be modulo by 24 and 60 respectively)] | !{0} set <#:##/##:##> <AM/PM> [Sets the specified time in #:## or ##:## format to AM or PM on the clock and submits it] | !{0} submit [Submits the current time on the clock]";
     #pragma warning restore 414
 
     IEnumerator ProcessTwitchCommand(string command)
     {
-        if (Regex.IsMatch(command, @"^\s*submit\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        command = command.ToLowerInvariant().Trim();
+        Match m = Regex.Match(command, @"^(?:submit|(hours|minutes) (forwards|backwards) (\d{1,2})|set (\d{1,2}):(\d{2}) (a|p)m)$");
+        if (m.Success)
         {
-            yield return null;
-            SubmitButton.OnInteract();
-            yield break;
+            if (m.Groups[3].Success)
+            {
+                yield return null;
+                KMSelectable button;
+                button = m.Groups[1].Value == "hours" ? m.Groups[2].Value == "forwards" ? TimeButtons[0] : TimeButtons[1] : m.Groups[2].Value == "forwards" ? TimeButtons[2] : TimeButtons[3];
+                int count = m.Groups[1].Value == "hours" ? int.Parse(m.Groups[3].Value) % 24 : int.Parse(m.Groups[3].Value) % 60;
+                for (int i = 0; i < count; i++)
+                {
+                    button.OnInteract();
+                    yield return new WaitForSeconds(.05f);
+                    yield return "trycancel";
+                }
+            }
+            else if (m.Groups[4].Success)
+            {
+                int tpHours = int.Parse(m.Groups[4].Value);
+                int tpMins = int.Parse(m.Groups[5].Value);
+                if (tpHours < 1 || tpHours > 12 || tpMins < 0 || tpMins > 59)
+                {
+                    yield return "sendtochaterror Invalid time! Hours must be in between 1 - 12 and minutes must be in between 0 - 59";
+                    yield break;
+                }
+                yield return null;
+                int minutesDiff = Math.Abs(currentMinute - tpMins);
+                KMSelectable button;
+                button = currentMinute > tpMins ? minutesDiff > 30 ? TimeButtons[2] : TimeButtons[3] : minutesDiff > 30 ? TimeButtons[3] : TimeButtons[2];
+                while (currentMinute != tpMins)
+                {
+                    button.OnInteract();
+                    yield return new WaitForSeconds(.05f);
+                    yield return "trycancel";
+                }
+                int AMPMOffset = currentState == "PM" ? 12 : 0;
+                int current24Hour = AMPMOffset + currentHour % 12;
+                int target24Hour = (tpHours % 12) + (m.Groups[6].Value == "p" ? 12 : 0);
+                int hoursDiff = Math.Abs(current24Hour - target24Hour);
+                button = current24Hour > target24Hour ? hoursDiff > 12 ? TimeButtons[0] : TimeButtons[1] : hoursDiff > 12 ? TimeButtons[1] : TimeButtons[0];
+                while (current24Hour != target24Hour)
+                {
+                    button.OnInteract();
+                    yield return new WaitForSeconds(.05f);
+                    yield return "trycancel";
+                    AMPMOffset = currentState == "PM" ? 12 : 0;
+                    current24Hour = AMPMOffset + currentHour % 12;
+                }
+            }
+            else
+            {
+                yield return null;
+                SubmitButton.OnInteract();
+                yield return new WaitForSeconds(.1f);
+            }
         }
-        string[] parameters = command.Split(' ');
-        if (Regex.IsMatch(parameters[0], @"^\s*hours\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        else
+            yield return "sendtochaterror Invalid command! Please use !{1} help to see full command.";
+        yield break;
+    }
+
+    //TP Autosolver variables
+    private bool submitCorrectTime = true;
+    private bool answerIsCorrect = false;
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        do
         {
-            yield return null;
-            if (parameters.Length > 3)
+            SubmitButtonPressed(true);
+            if (submitCorrectTime)
             {
-                yield return "sendtochaterror Too many parameters!";
+                string hourToSubmit = correctHour == 0 ? "12" : correctHour.ToString();
+                string minuteToSubmit = correctMinute.ToString();
+                if (minuteToSubmit.Length != 2)
+                    minuteToSubmit = "0" + minuteToSubmit;
+                yield return ProcessTwitchCommand("set " + hourToSubmit + ":" + minuteToSubmit + " " + correctState);
             }
-            else if (parameters.Length == 3)
+            else
             {
-                int hrs = 0;
-                bool parsed = int.TryParse(parameters[2], out hrs);
-                if (parameters[1].EqualsIgnoreCase("forward") || parameters[1].EqualsIgnoreCase("backward"))
+                int minuteToSubmit = finishingMinute + 1;
+                int hourToSubmit = finishingHour;
+                if (minuteToSubmit == 60)
                 {
-                    if (parsed)
-                    {
-                        if (hrs > -1)
-                        {
-                            for (int i = 0; i < hrs % 24; i++)
-                            {
-                                if (parameters[1].EqualsIgnoreCase("forward"))
-                                {
-                                    TimeButtons[0].OnInteract();
-                                    yield return new WaitForSeconds(0.1f);
-                                }
-                                else
-                                {
-                                    TimeButtons[1].OnInteract();
-                                    yield return new WaitForSeconds(0.1f);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be greater than -1!";
-                        }
-                    }
-                    else
-                    {
-                        yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be an number!";
-                    }
+                    minuteToSubmit = 0;
+                    hourToSubmit += 1;
                 }
-                else
-                {
-                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
-                }
+                hourToSubmit %= 24;
+                string stateToSubmit = hourToSubmit >= 12 ? "PM" : "AM";
+                hourToSubmit %= 12;
+                string minuteToSubmitString = minuteToSubmit.ToString();
+                if (minuteToSubmitString.Length != 2)
+                    minuteToSubmitString = "0" + minuteToSubmitString;
+                if (hourToSubmit == 0) hourToSubmit = 12;
+                    yield return ProcessTwitchCommand("set " + hourToSubmit.ToString() + ":" + minuteToSubmitString + " " + stateToSubmit);
             }
-            else if (parameters.Length == 2)
-            {
-                if (parameters[1].EqualsIgnoreCase("forward"))
-                    yield return "sendtochaterror Please specify how many hours forward you would like to go!";
-                else if (parameters[1].EqualsIgnoreCase("backward"))
-                    yield return "sendtochaterror Please specify how many hours backward you would like to go!";
-                else
-                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
-            }
-            else if (parameters.Length == 1)
-            {
-                yield return "sendtochaterror Please specify whether you would like to go forward or backward and how many hours to!";
-            }
-            yield break;
+            answerIsCorrect = false;
+
+            //Due to length of input, check again if the answer is right.
+            SubmitButtonPressed(true);
         }
-        if (Regex.IsMatch(parameters[0], @"^\s*minutes\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
-        {
-            yield return null;
-            if (parameters.Length > 3)
-            {
-                yield return "sendtochaterror Too many parameters!";
-            }
-            else if (parameters.Length == 3)
-            {
-                int mins = 0;
-                bool parsed = int.TryParse(parameters[2], out mins);
-                if (parameters[1].EqualsIgnoreCase("forward") || parameters[1].EqualsIgnoreCase("backward"))
-                {
-                    if (parsed)
-                    {
-                        if (mins > -1)
-                        {
-                            for (int i = 0; i < mins % 60; i++)
-                            {
-                                if (parameters[1].EqualsIgnoreCase("forward"))
-                                {
-                                    TimeButtons[2].OnInteract();
-                                    yield return new WaitForSeconds(0.1f);
-                                }
-                                else
-                                {
-                                    TimeButtons[3].OnInteract();
-                                    yield return new WaitForSeconds(0.1f);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be greater than -1!";
-                        }
-                    }
-                    else
-                    {
-                        yield return "sendtochaterror Invalid parameter '" + parameters[2] + "'! This must be an number!";
-                    }
-                }
-                else
-                {
-                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
-                }
-            }
-            else if (parameters.Length == 2)
-            {
-                if (parameters[1].EqualsIgnoreCase("forward"))
-                    yield return "sendtochaterror Please specify how many minutes forward you would like to go!";
-                else if (parameters[1].EqualsIgnoreCase("backward"))
-                    yield return "sendtochaterror Please specify how many minutes backward you would like to go!";
-                else
-                    yield return "sendtochaterror Invalid parameter '" + parameters[1] + "'! This must be either forward or backward!";
-            }
-            else if (parameters.Length == 1)
-            {
-                yield return "sendtochaterror Please specify whether you would like to go forward or backward and how many minutes to!";
-            }
-            yield break;
-        }
+        while (!answerIsCorrect);
+        SubmitButton.OnInteract();
+        yield return new WaitForSeconds(.1f);
     }
 }
