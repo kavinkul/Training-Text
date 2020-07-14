@@ -561,14 +561,14 @@ public class TrainingText : MonoBehaviour {
     IEnumerator ProcessTwitchCommand(string command)
     {
         command = command.ToLowerInvariant().Trim();
-        Match m = Regex.Match(command, @"^(?:submit|(hours|minutes) (forwards|backwards) (\d{1,2})|set (\d{1,2}):(\d{2}) (a|p)m)$");
+        Match m = Regex.Match(command, @"^(?:submit|(hours|minutes) (forward|backward) (\d{1,2})|set (\d{1,2}):(\d{2}) (a|p)m)$");
         if (m.Success)
         {
             if (m.Groups[3].Success)
             {
                 yield return null;
                 KMSelectable button;
-                button = m.Groups[1].Value == "hours" ? m.Groups[2].Value == "forwards" ? TimeButtons[0] : TimeButtons[1] : m.Groups[2].Value == "forwards" ? TimeButtons[2] : TimeButtons[3];
+                button = m.Groups[1].Value == "hours" ? m.Groups[2].Value == "forward" ? TimeButtons[0] : TimeButtons[1] : m.Groups[2].Value == "forward" ? TimeButtons[2] : TimeButtons[3];
                 int count = m.Groups[1].Value == "hours" ? int.Parse(m.Groups[3].Value) % 24 : int.Parse(m.Groups[3].Value) % 60;
                 for (int i = 0; i < count; i++)
                 {
